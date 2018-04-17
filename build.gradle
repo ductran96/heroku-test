@@ -3,6 +3,34 @@ plugins {
 	 //id 'org.akhikhl.gretty' version '1.4.2'
 }
 
+sourceSets {  
+    	integTest {
+        	java.srcDir file('src/integTest/java')
+        	resources.srcDir file('src/integTest/resources')
+    	}
+
+	sTest {
+		java.srcDir file('src/test/java')
+        	resources.srcDir file('src/test/resources')
+	}
+}
+
+task Test(type: Test) {  
+    	  testClassesDirs = sourceSets.sTest.output.classesDirs
+    	  classpath = sourceSets.sTest.runtimeClasspath
+    	  mustRunAfter(test)
+}
+
+task integTest(type: Test) {  
+    	  testClassesDirs = sourceSets.integTest.output.classesDirs
+    	  classpath = sourceSets.integTest.runtimeClasspath
+    	  mustRunAfter(test)
+}
+
+task allTests{
+dependsOn test, integTest
+}
+
 
 //Include the jetty runner into the build/server folder
 task copyToLib(type: Copy) {
@@ -33,4 +61,15 @@ dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0' 
     testCompile 'junit:junit:4.12'
 	compileOnly 'org.eclipse.jetty:jetty-runner:9.4.9.v20180320'
+
+
+
+integTestCompile configurations.testCompile
+    integTestRuntime configurations.testRuntime
+
+integTestCompile sourceSets.main.output
+    integTestCompile sourceSets.test.output
+
+
+	
 }
