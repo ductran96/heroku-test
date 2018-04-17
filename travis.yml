@@ -13,5 +13,13 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     
+#Skip install step
+install: true
+#Run only integration tests defined by the Gradle task
+script: 
+ - ./gradlew integTest 
+
+    
+    
     
     

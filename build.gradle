@@ -3,23 +3,27 @@ plugins {
 	 //id 'org.akhikhl.gretty' version '1.4.2'
 }
 
+//Include the jetty runner into the build/server folder
+task copyToLib(type: Copy) {
+    into "$buildDir/server"				//Default $buildDir is build/
+    from(configurations.compileOnly) {	//Note the use of the name of dependency 
+        include "jetty-runner*"			// configuration "compileOnly"
+        rename { String fileName -> 		//Forget the version # from filename
+"jetty-runner.jar"   
+        }
+    }
+}
+
 sourceSets {  
     	integTest {
         	java.srcDir file('src/integTest/java')
         	resources.srcDir file('src/integTest/resources')
     	}
 
-	sTest {
-		java.srcDir file('src/test/java')
-        	resources.srcDir file('src/test/resources')
-	}
+	
 }
 
-task Test(type: Test) {  
-    	  testClassesDirs = sourceSets.sTest.output.classesDirs
-    	  classpath = sourceSets.sTest.runtimeClasspath
-    	  mustRunAfter(test)
-}
+
 
 task integTest(type: Test) {  
     	  testClassesDirs = sourceSets.integTest.output.classesDirs
@@ -32,16 +36,7 @@ dependsOn test, integTest
 }
 
 
-//Include the jetty runner into the build/server folder
-task copyToLib(type: Copy) {
-    into "$buildDir/server"				//Default $buildDir is build/
-    from(configurations.compileOnly) {	//Note the use of the name of dependency 
-        include "jetty-runner*"			// configuration "compileOnly"
-        rename { String fileName -> 		//Forget the version # from filename
-"jetty-runner.jar"   
-        }
-    }
-}
+
 
 //Add to task stage that Heroku to prepare deployment
 task stage {

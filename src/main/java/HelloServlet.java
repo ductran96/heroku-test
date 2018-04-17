@@ -22,8 +22,5 @@ public class HelloServlet extends HttpServlet {
         request.getRequestDispatcher("response.jsp").forward(request, response); 
     }
     
-    public String toString(){
-        return "HI";
-        
-    }
+    
 }

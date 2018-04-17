@@ -1,16 +1,11 @@
-public class dummyintegrationTest{
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class dummyIntegrationTest {
     
-    public dummyintegrationTest() {
-    }
-    
-  
     @Test
-    public void dummyIntegrationUnitTest() {
-        assertEquals(0, 1);
+    public void integrationTest2() {
+        assertEquals(1, 1);
     }
-
-    
-    
-
-    
 }
