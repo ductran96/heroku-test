@@ -21,17 +21,17 @@ public class HelloServletTest {
     public HelloServletTest() {
     }
     
-    @Test
+  /*  @Test
     public void setUpClass() {
         HelloServlet classUnderTest = new HelloServlet();
         assertNotNull("app should have a greeting", classUnderTest);
     
         
     }
-    
+    */
     @Test
     public void dummyUnitTest() {
-       // assertEquals(0, 1);
+        assertEquals(0, 1);
     }
 
     
