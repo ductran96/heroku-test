@@ -11,13 +11,13 @@ import java.io.IOException;
 public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        response.getWriter().print("Hello, World!");  
+        response.getWriter().print("Hello, amir!");  
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         String name = request.getParameter("name");
-        if (name == null) name = "Amir";
+        if (name == null) name = "non";
 
         request.setAttribute("user", name);
         request.getRequestDispatcher("response.jsp").forward(request, response); 
