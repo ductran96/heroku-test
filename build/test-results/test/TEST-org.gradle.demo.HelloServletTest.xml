@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.gradle.demo.HelloServletTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-04-27T09:50:54" hostname="LAPTOP-M39CQ7KD" time="0.002">
+<testsuite name="org.gradle.demo.HelloServletTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-04-27T09:57:07" hostname="LAPTOP-M39CQ7KD" time="0.002">
   <properties/>
   <testcase name="dummyUnitTest2" classname="org.gradle.demo.HelloServletTest" time="0.001"/>
   <testcase name="dummyUnitTest" classname="org.gradle.demo.HelloServletTest" time="0.0"/>
