@@ -35,7 +35,7 @@ public class addServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/text;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
             
