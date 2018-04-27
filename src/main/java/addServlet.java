@@ -46,7 +46,7 @@ public class addServlet extends HttpServlet {
             
             if(null != sdata){
                 
-                new CheckManager().CanIGetAllData(new AppTableEntity(id,sdata,lat,lon));
+                out.println(new CheckManager().CanIGetAllData(new AppTableEntity(id,sdata,lat,lon)));
                 
             }else{
            // if (name == null) name = "non";
