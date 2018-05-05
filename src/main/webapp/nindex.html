@@ -1,0 +1,32 @@
+<html>
+
+<head>
+  <title>Web Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="application/javascript" src="geolocationtest.js"></script>
+  <!--<link rel="stylesheet" href="CSS/cards.css">-->
+
+</head>
+
+<body>
+  <p id="rangeShow"></p>
+  <p id="demo"></p>
+  <select id="range" name="range">
+    <option value="0">0</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+  </select>
+
+  <div id="mapholder"></div>
+  <div id="mapholder2"></div>
+  <form method="post" id="getStuf" action="http://18.216.115.205:8080/WebApplication15/webresources/some">
+      <h2>Name:</h2>
+      <input type="number" id="say-hello-text-input" name="id" />
+      <input type="submit" id="getStuff2" value="Get stuff" />
+  </form>
+  <button id="geoLocate">Get position</button>
+</body>
+
+</html>
