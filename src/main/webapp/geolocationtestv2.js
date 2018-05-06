@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     response.json().then(function (data) {
                         console.log("Found message: " + data[0].somedata);
-                        dataField.innerHTML = "You found a message that says: " + data[0].somedata;
+                        dataField.innerHTML = "You found a message that says: " + data[0].somedata +"<br> At coordinates:<br> Latitude "+data[0].lat+"<br> Longitude "+data[0].lon;
                     });
                 });
     });
