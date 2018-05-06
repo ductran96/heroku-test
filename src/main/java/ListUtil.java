@@ -17,41 +17,37 @@ public class ListUtil {
 
     public ListUtil() {
         list = new ArrayList<AppTableEntity>();
-        list.add(new AppTableEntity(1,"first",23.3,24.4,"key",0.5));
-        
+        list.add(new AppTableEntity(1, "first", 23.3, 24.4, "key", 0.5));
+
     }
 
     public boolean addValue(String value) {
 
         String[] slist = value.split(";");
-        
+
         if (slist.length < 5 || slist == null) {
             return false;
         }
-        
+
         String data = slist[0];
         Double lat = Double.parseDouble(slist[1]);
         Double lon = Double.parseDouble(slist[2]);
         String key = slist[3];
         Double rang = Double.parseDouble(slist[4]);
-        
-        if(key.equals("0")){
-            key=null;
+
+        if (key.equals("0")) {
+            key = null;
         }
         if(rang <= 0){
-            rang = 0.05;
-        }else{
-            
+            rang = 100.0;
         }
-        
+            
         list.add(new AppTableEntity(list.size() + 1,
-        data,
-        lat,
-        lon,
-        key,
-        rang));
-
-        
+                data,
+                lat,
+                lon,
+                key,
+                rang));
 
         return true;
     }
@@ -75,10 +71,15 @@ public class ListUtil {
         List<AppTableEntity> tmp = new ArrayList<>();
 
         for (AppTableEntity ate : list) {
-            if (checkRange(at, ate)) {
+            if (checkRange2(at, ate)) {
+                if (at.getKeyElement() != null) {
+                    if (at.getKeyElement().equals(ate.getKeyElement())) {
+                        tmp.add(ate);
+                    }
+                } else {
+                    tmp.add(ate);
+                }
 
-                tmp.add(ate);
-                
             }
 
         }
@@ -91,6 +92,44 @@ public class ListUtil {
         double val = Math.sqrt(Math.pow(at.getLat() - ate.getLat(), 2) + Math.pow(at.getLon() - ate.getLon(), 2));
         // System.out.println("1: " + val + " 2: " + ate.getRang());
         return val < ate.getRang();
+    }
+    
+    private boolean checkRange2(AppTableEntity at, AppTableEntity ate){
+        
+        double R = 6378137;
+        double lat = ate.getLat();
+        double lon = ate.getLon();
+            
+            
+        double dlat = ate.getRang()/R;
+        double dlon = ate.getRang()/(R*Math.cos((Math.PI*at.getLat()/180)));
+
+        double lat0 = lat + dlat * 180/Math.PI;
+        double lon0 = lon + dlon * 180/Math.PI;
+
+        double lat1 = lat - dlat * 180/Math.PI;
+        double lon1 = lon - dlon * 180/Math.PI;
+
+        if(at.getLat() >= lat1 && at.getLat() <= lat0){
+            
+            if(at.getLon() >= lon1 && at.getLon() <= lon0){
+                return true;
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
+        
+        /*
+        System.out.println("NE point latitude is: " + lat0);
+        System.out.println("NE point longitude is: "+ lon0);
+
+        System.out.println("SW point latitude is: " + lat1);
+        System.out.println("SW point longitude is: "+ lon1);
+        */
+        
+        
     }
 
 }
