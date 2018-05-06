@@ -32,6 +32,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     */
+    function showPositionFinal(position) {
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+    }
+
+    function UpdateYourPosition() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPositionFinal);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+
+    }
+
+
+
     function showPosition(position) {
         lat = position.coords.latitude;
         long = position.coords.longitude;
@@ -48,7 +64,30 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#mapholder").innerHTML = `<img src="${map}">`
     }
     let fetchData = document.querySelector("#fetchData");
-    fetchData.addEventListener("click", function getLocationv2() {
+    fetchData.addEventListener("click", function getLocationv2(position) {
+        UpdateYourPosition();
+        let yourCoords = lat + ";" + long;
+        fetch("get", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: yourCoords,
+        })
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.warn('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+
+                    response.json().then(function (data) {
+                        console.log("Found message: " + data.somedata);
+                        dataField.innerHTML = "You found a message that says: " + respo.somedata + "<br> At coordinates:<br> Latitude " + data.lat + "<br> Longitude " + data.lon;
+                    });
+                });
+        /*
         fetch("get")
             .then(
                 function (response) {
@@ -63,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         dataField.innerHTML = "You found a message that says: " + data[0].somedata +"<br> At coordinates:<br> Latitude "+data[0].lat+"<br> Longitude "+data[0].lon;
                     });
                 });
+                */
     });
     /*
     submitData.addEventListener("click", function leaveData(position) {
