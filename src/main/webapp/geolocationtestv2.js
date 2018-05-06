@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //let range = document.querySelector("#range");
     //let stuffUrl = "http://18.216.115.205:8080/WebApplication15/webresources/some"
     let getStuff = document.querySelector("#getStuff");
-    let submitData = document.querySelector("#submit");
+    //let submitData = document.querySelector("#submit");
     let data = document.querySelector("#data");
     let longitude = document.querySelector("#longitude");
     let latitude = document.querySelector("#latitude");
@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
 
         var map = "https://maps.googleapis.com/maps/api/staticmap?center="
-            + latlon + "&markers=color:red%7Clabel:C%7C" + latlon + "&zoom=18&size=400x300&key=AIzaSyA2AzcUJLiiu879rNxangBccd4YeH8FBBQ";
+            + latlon + "&markers=color:red%7Clabel:C%7C" + latlon + "&zoom=16&size=400x300&key=AIzaSyA2AzcUJLiiu879rNxangBccd4YeH8FBBQ";
         //let map = "https://maps.googleapis.com/maps/api/staticmap?center="
-        //+latlon+"&zoom=14&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
+        //+latlon+"&zoom=12&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
         console.log(position.coords.longitude + ", " + position.coords.latitude);
         document.querySelector("#mapholder").innerHTML = `<img src="${map}">`
     }
@@ -59,11 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                     response.json().then(function (data) {
-                        console.log("Found message" + data.somedata);
-                        dataField.innerHTML = "You found a message that says: " + data.somedata;
+                        console.log("Found message: " + data[0].somedata);
+                        dataField.innerHTML = "You found a message that says: " + data[0].somedata;
                     });
                 });
     });
+    /*
     submitData.addEventListener("click", function leaveData(position) {
         let somedata = data.value + ";" + long + ";" + lat + ";" + key.value + ";" + range.value;
         console.log(somedata);
@@ -78,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error('Error: ' + error))
             .then(response => console.log('Success:', response));
     })
+    */
     printButton.addEventListener("click", function printData() {
         /*
         let somedata = data.value + ";" + long + ";" + lat + ";" + key.value + ";" + range.value;
