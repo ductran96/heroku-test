@@ -38,12 +38,10 @@ public class ListUtil {
         if (key.equals("0")) {
             key = null;
         }
-        if (rang <= 0) {
-            rang = 0.05;
-        } else {
-
+        if(rang <= 0){
+            rang = 100.0;
         }
-
+            
         list.add(new AppTableEntity(list.size() + 1,
                 data,
                 lat,
@@ -73,7 +71,7 @@ public class ListUtil {
         List<AppTableEntity> tmp = new ArrayList<>();
 
         for (AppTableEntity ate : list) {
-            if (checkRange(at, ate)) {
+            if (checkRange2(at, ate)) {
                 if (at.getKeyElement() != null) {
                     if (at.getKeyElement().equals(ate.getKeyElement())) {
                         tmp.add(ate);
@@ -94,6 +92,44 @@ public class ListUtil {
         double val = Math.sqrt(Math.pow(at.getLat() - ate.getLat(), 2) + Math.pow(at.getLon() - ate.getLon(), 2));
         // System.out.println("1: " + val + " 2: " + ate.getRang());
         return val < ate.getRang();
+    }
+    
+    private boolean checkRange2(AppTableEntity at, AppTableEntity ate){
+        
+        double R = 6378137;
+        double lat = ate.getLat();
+        double lon = ate.getLon();
+            
+            
+        double dlat = ate.getRang()/R;
+        double dlon = ate.getRang()/(R*Math.cos((Math.PI*at.getLat()/180)));
+
+        double lat0 = lat + dlat * 180/Math.PI;
+        double lon0 = lon + dlon * 180/Math.PI;
+
+        double lat1 = lat - dlat * 180/Math.PI;
+        double lon1 = lon - dlon * 180/Math.PI;
+
+        if(at.getLat() >= lat1 && at.getLat() <= lat0){
+            
+            if(at.getLon() >= lon1 && at.getLon() <= lon0){
+                return true;
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
+        
+        /*
+        System.out.println("NE point latitude is: " + lat0);
+        System.out.println("NE point longitude is: "+ lon0);
+
+        System.out.println("SW point latitude is: " + lat1);
+        System.out.println("SW point longitude is: "+ lon1);
+        */
+        
+        
     }
 
 }
