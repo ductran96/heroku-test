@@ -1,19 +1,147 @@
 <html>
+
 <head>
   <title>Web Demo</title>
-</head>
-<body>
-<p>Say <a href="get">Hello</a></p> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="application/javascript" src="geolocationtestv2.js"></script>
+  <!--<link rel="stylesheet" href="CSS/cards.css">-->
 
-<form method="post" action="add">  
-  <h2>post</h2>
-  <input type="text" id="say-hello-text-input" name="somedata" />
-  <input type="submit" id="say-hello-button" value="Say Hello" />
-</form>
-<form method="post" action="get">  
-  <h2>get</h2>
-  <input type="text" id="say-hello-text-input" name="somedata" />
-  <input type="submit" id="say-hello-button" value="Say Hello" />
-</form>
+</head>
+<style>
+  body {
+    font-family: helvetica;
+    font-size: 14px;
+  }
+
+  form div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    font-weight: bold;
+    line-height: 23px;
+    float: left;
+  }
+
+  form input#key {
+    margin-left: 50px;
+  }
+
+  form input#data {
+    margin-left: 46px;
+  }
+
+  form input#range {
+    margin-left: 32px;
+  }
+
+  form input#longitude {
+    margin-left: 10px;
+  }
+
+  form input#latitude {
+    margin-left: 22px;
+  }
+
+  #form {
+    width: 400px;
+    border: 1px solid #000;
+    background: #A8D4FF;
+    margin: 40px 120px;
+    padding: 10px 0px 0px 50px;
+  }
+
+  #content {
+    display: flex;
+  }
+
+  .button:hover {
+    color: #fff;
+    background: #5197FF;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <p>Say
+    <a href="get">Hello</a>
+  </p>
+  <p id="rangeShow"></p>
+  <p id="demo"></p>
+  <!--
+  <select id="range" name="range">
+    <option value="0">0</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+  </select>
+-->
+  <form method="post" action="add">
+    <h2>post</h2>
+    <input type="text" id="say-hello-text-input" name="somedata" />
+    <input type="submit" id="say-hello-button" value="Say Hello" />
+  </form>
+  <form method="post" action="get">
+    <h2>get</h2>
+    <input type="text" id="say-hello-text-input" name="somedata" />
+    <input type="submit" id="say-hello-button" value="Say Hello" />
+  </form>
+  <div id="content">
+    <div id="mapholder"></div>
+    <form method="post" action="" id="form">
+
+
+      <div>
+        <label for="data"> Data :</label>
+        <input type="text" name="data" id="data" required/>
+      </div>
+      <!--
+      <div>
+        <label for="longitude"> Longitude :</label>
+        <input type="text" name="longitude" id="longitude" required/>
+
+
+      </div>
+
+      <div>
+        <label for="latitude"> Latitude :</label>
+        <input type="text" name="latitude" id="latitude" required/>
+
+
+      </div>
+      -->
+      <div>
+        <label for="key"> Key :</label>
+        <input type="text" name="key" id="key" />
+
+
+      </div>
+      <div>
+        <label for="range"> Range :</label>
+        <input type="number" name="range" id="range" />
+
+
+      </div>
+      <div>
+        <input type="button" value="Submit data" class="button" id="dataSubmit" />
+        <input type="submit" value="Send" class="button" id="submit" />
+        <input type="reset" value="Reset" class="button" />
+        <input type="button" value="Print" class="button" id="printButton"/>
+      </div>
+    </form>
+  </div>
+  <div id="mapholder2"></div>
+  <form method="post" id="getStuff">
+    <h2>Name:</h2>
+    <input type="number" id="say-hello-text-input" name="id" />
+    <input type="submit" id="getStuff2" value="Get stuff" />
+  </form>
+  <button id="geoLocate">Get position</button>
+
+
+
+
 </body>
+
 </html>
