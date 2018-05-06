@@ -90,10 +90,20 @@ public class AppTableEntity {
     
     
     public String toString(){
+        String s = "{\"id\":"+this.ID+","+
+                "\"somedata\":\""+this.somedata+"\","+
+                "\"lat\":"+this.lat+","+
+                "\"lon\":"+this.lon+","+
+                "\"darange\":"+this.darange+","+
+                "\"keyelement\":\""+this.keyelement+"\","+
+                "\"reg_data\":\""+this.reg_date+"\"}";
         
-        return "{'id':'"+this.ID+"',"+"'somedata':'"+this.somedata+"',"+"'lat':'"+this.lat+"',"+"'lon':'"+this.lon+"',"
+        return s;
+        /*
+        return '{"id":"'+this.ID+'",'+'"somedata":"'+this.somedata+'",'+'"lat":"'+this.lat+'","'+"'lon':'"+this.lon+"',"
                 +"'darange':'"+this.darange+"',"+"'keyelement':'"+this.keyelement+"',"
                 +"'reg_data':'"+this.reg_date+"'}";
+*/
     }
     
     

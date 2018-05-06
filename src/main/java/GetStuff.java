@@ -13,7 +13,7 @@ public class GetStuff extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().print("Hello, amir! "+lu.getvalue());
+        response.getWriter().print(lu.getvalue());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,9 +22,9 @@ public class GetStuff extends HttpServlet {
         String somedata = request.getParameter("somedata");
 
         
-
+        
         request.setAttribute("user", lu.getValuebasedOnLocation(somedata));
-        request.getRequestDispatcher("response.jsp").forward(request, response);
+        request.getRequestDispatcher("index.html").forward(request, response);
     }
 
 }

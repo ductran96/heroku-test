@@ -17,41 +17,39 @@ public class ListUtil {
 
     public ListUtil() {
         list = new ArrayList<AppTableEntity>();
-        list.add(new AppTableEntity(1,"first",23.3,24.4,"key",0.5));
-        
+        list.add(new AppTableEntity(1, "first", 23.3, 24.4, "key", 0.5));
+
     }
 
     public boolean addValue(String value) {
 
         String[] slist = value.split(";");
-        
+
         if (slist.length < 5 || slist == null) {
             return false;
         }
-        
+
         String data = slist[0];
         Double lat = Double.parseDouble(slist[1]);
         Double lon = Double.parseDouble(slist[2]);
         String key = slist[3];
         Double rang = Double.parseDouble(slist[4]);
-        
-        if(key.equals("0")){
-            key=null;
-        }
-        if(rang <= 0){
-            rang = 0.05;
-        }else{
-            
-        }
-        
-        list.add(new AppTableEntity(list.size() + 1,
-        data,
-        lat,
-        lon,
-        key,
-        rang));
 
-        
+        if (key.equals("0")) {
+            key = null;
+        }
+        if (rang <= 0) {
+            rang = 0.05;
+        } else {
+
+        }
+
+        list.add(new AppTableEntity(list.size() + 1,
+                data,
+                lat,
+                lon,
+                key,
+                rang));
 
         return true;
     }
@@ -76,9 +74,14 @@ public class ListUtil {
 
         for (AppTableEntity ate : list) {
             if (checkRange(at, ate)) {
+                if (at.getKeyElement() != null) {
+                    if (at.getKeyElement().equals(ate.getKeyElement())) {
+                        tmp.add(ate);
+                    }
+                } else {
+                    tmp.add(ate);
+                }
 
-                tmp.add(ate);
-                
             }
 
         }
