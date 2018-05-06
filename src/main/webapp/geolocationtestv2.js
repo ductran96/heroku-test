@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let lat;
     let long;
     let printButton = document.querySelector("#printButton");
+    let dataField = document.querySelector("#dataField");
     getPos.addEventListener("click", function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition);
@@ -46,18 +47,23 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(position.coords.longitude + ", " + position.coords.latitude);
         document.querySelector("#mapholder").innerHTML = `<img src="${map}">`
     }
-    let dataSubmit = document.querySelector("#dataSubmit");
-    dataSubmit.addEventListener("click", function getLocationv2() {
-        if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(showPositionv2);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    })
-    function showPositionv2(position) {
-        console.log("moi");
-        console.log(long + ", " + lat);
-    }
+    let fetchData = document.querySelector("#fetchData");
+    fetchData.addEventListener("click", function getLocationv2() {
+        fetch("get")
+            .then(
+                function (response) {
+                    if (response.status !== 200) {
+                        console.warn('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+
+                    response.json().then(function (data) {
+                        console.log("Found message" + data.somedata);
+                        dataField.innerHTML = "You found a message that says: " + data.somedata;
+                    });
+                });
+    });
     submitData.addEventListener("click", function leaveData(position) {
         let somedata = data.value + ";" + long + ";" + lat + ";" + key.value + ";" + range.value;
         console.log(somedata);
@@ -108,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: formBody
         })
+            .catch(error => console.error('Error: ' + error))
+            .then(response => console.log('Success:', response));
     })
 
     /*
