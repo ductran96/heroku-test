@@ -1,6 +1,15 @@
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,17 +20,54 @@ import java.util.List;
  *
  * @author Amir Ingher
  */
-public class ListUtil {
+public class ListUtil{
 
     private static List<AppTableEntity> list;
 
     public ListUtil() {
         list = new ArrayList<AppTableEntity>();
+        loadList();
         list.add(new AppTableEntity(1, "first", 23.3, 24.4, "key", 0.5));
 
     }
+    
+    private void loadList(){
+        try{
+            List<AppTableEntity> temp;
+            temp = list;
+            list =(ArrayList)deserialize("test1.ser");
+                    for (AppTableEntity val : temp) {
+                        list.add(val);
+                    }
+        //list = (ArrayList)deserialize("test.ser");
+        
+        }catch(Exception e){}
+    }
+    public static Object deserialize(String fileName) throws IOException,
+            ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(fileName);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        Object obj = ois.readObject();
+        
+        ois.close();
+        return obj;
+    }
 
-    public boolean addValue(String value) {
+    /**
+     * serialize the given object and save it to given file
+     */
+    public static void serialize(Object obj, String fileName)
+            throws IOException {
+        
+        FileOutputStream fos = new FileOutputStream(fileName);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(obj);
+        oos.close();
+    }
+
+    public boolean addValue(String value) throws IOException {
 
         String[] slist = value.split(";");
 
@@ -48,7 +94,11 @@ public class ListUtil {
                 lon,
                 key,
                 rang));
-
+        try{
+        
+        serialize(list,"test1.ser");
+        
+        }catch(Exception e){}
         return true;
     }
 
