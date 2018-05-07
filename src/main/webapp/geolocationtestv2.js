@@ -67,6 +67,20 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchData.addEventListener("click", function getLocationv2(position) {
         UpdateYourPosition();
         let yourCoords = lat + ";" + long;
+        /*
+        var xhr = new XMLHttpRequest();
+        var url = "get";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "text/plain");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json.email + ", " + json.password);
+            }
+        };
+        //var data = JSON.stringify({ "email": "hey@mail.com", "password": "101010" });
+        xhr.send(yourCoords);
+        */
         fetch("get", {
             method: 'POST',
             headers: {
@@ -87,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         dataField.innerHTML = "You found a message that says: " + data.somedata + "<br> At coordinates:<br> Latitude " + data.lat + "<br> Longitude " + data.lon;
                     });
                 });
+                
         /*
         fetch("get")
             .then(
