@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
 
         var map = "https://maps.googleapis.com/maps/api/staticmap?center="
-            + latlon + "&markers=color:red%7Clabel:C%7C" + latlon + "&zoom=16&size=400x300&key=AIzaSyA2AzcUJLiiu879rNxangBccd4YeH8FBBQ";
+            + latlon + "&markers=color:red%7Clabel:%7C" + latlon + "&zoom=16&size=400x300&key=AIzaSyA2AzcUJLiiu879rNxangBccd4YeH8FBBQ";
         //let map = "https://maps.googleapis.com/maps/api/staticmap?center="
         //+latlon+"&zoom=12&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
         console.log(position.coords.longitude + ", " + position.coords.latitude);
