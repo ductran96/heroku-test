@@ -12,6 +12,7 @@
   body {
     font-family: helvetica;
     font-size: 14px;
+    background-color: rgb(229, 231, 234);
   }
 
   form div {
@@ -43,17 +44,16 @@
   form input#latitude {
     margin-left: 22px;
   }
-
   #form {
     width: 400px;
-    border: 1px solid #000;
-    background: #A8D4FF;
-    margin: 40px 120px;
-    padding: 10px 0px 0px 50px;
+    height: 288px;
+    /*border: 1px solid #000;*/
+    background: rgb(229, 231, 234);
+    margin: 0px 0px;
+    align-content: center;
   }
-
   #content {
-    display: flex;
+    display:flex;
   }
 
   .button:hover {
@@ -64,8 +64,8 @@
 </style>
 
 <body>
-  <p>Say
-    <a href="get">Hello</a>
+  <p>Check
+    <a href="get">List</a>
   </p>
   <p id="rangeShow"></p>
   <p id="demo"></p>
@@ -80,15 +80,15 @@
   <form method="post" action="add">
     <h2>post</h2>
     <input type="text" id="say-hello-text-input" name="somedata" />
-    <input type="submit" id="say-hello-button" value="Say Hello" />
+    <input type="submit" id="say-hello-button" value="Post" />
   </form>
   <form method="post" action="get">
     <h2>get</h2>
     <input type="text" id="say-hello-text-input" name="somedata" />
-    <input type="submit" id="say-hello-button" value="Say Hello" />
+    <input type="submit" id="say-hello-button" value="Get" />
   </form>
   <div id="content">
-    <div id="mapholder"></div>
+    
     <form method="post" action="" id="form">
 
 
@@ -129,6 +129,7 @@
         <input type="button" value="Post" class="button" id="printButton"/>
       </div>
     </form>
+    <div id="mapholder"></div>
     <p id="dataField"></p>
   </div>
   <form method="post" id="getStuff">

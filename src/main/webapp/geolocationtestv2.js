@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     response.json().then(function (data) {
                         console.log("Found message: " + data.somedata);
-                        dataField.innerHTML = "You found a message that says: " + respo.somedata + "<br> At coordinates:<br> Latitude " + data.lat + "<br> Longitude " + data.lon;
+                        dataField.innerHTML = "You found a message that says: " + data.somedata + "<br> At coordinates:<br> Latitude " + data.lat + "<br> Longitude " + data.lon;
                     });
                 });
         /*
