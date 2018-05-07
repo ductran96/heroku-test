@@ -22,9 +22,9 @@ public class GetStuff extends HttpServlet {
         String somedata = request.getParameter("somedata");
 
         
-        
-        request.setAttribute("user", lu.getValuebasedOnLocation(somedata));
-        request.getRequestDispatcher("index.html").forward(request, response);
+        response.getWriter().print(lu.getValuebasedOnLocation(somedata));
+        //request.setAttribute("user", lu.getValuebasedOnLocation(somedata));
+        //request.getRequestDispatcher("index.html").forward(request, response);
     }
 
 }
