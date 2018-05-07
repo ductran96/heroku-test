@@ -27,8 +27,8 @@ public class HelloServlet1 extends HttpServlet {
             lu.addValue(somedata);
         }
 
-      //  request.setAttribute("user", lu.getvalue());
-        // request.getRequestDispatcher("response.jsp").forward(request, response);
+        request.setAttribute("user", lu.getvalue());
+         request.getRequestDispatcher("index.html").forward(request, response);
     }
 
 }

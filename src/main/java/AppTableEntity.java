@@ -5,6 +5,7 @@
  */
 
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
  *
  * @author Amir Ingher
  */
-public class AppTableEntity {
+public class AppTableEntity implements Serializable {
     
     private int ID;
     private String somedata;
