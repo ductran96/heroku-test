@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let long;
     let printButton = document.querySelector("#printButton");
     let dataField = document.querySelector("#dataField");
+    
+    
     getPos.addEventListener("click", function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(showPosition);
@@ -39,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function UpdateYourPosition() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPositionFinal);
+            navigator.geolocation.watchPosition(showPositionFinal);
         } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
@@ -64,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector("#mapholder").innerHTML = `<img src="${map}">`
     }
     let fetchData = document.querySelector("#fetchData");
+    UpdateYourPosition();
     fetchData.addEventListener("click", function getLocationv2(position) {
         UpdateYourPosition();
         let yourCoords = lat + ";" + long;
@@ -81,12 +84,30 @@ document.addEventListener("DOMContentLoaded", function () {
         //var data = JSON.stringify({ "email": "hey@mail.com", "password": "101010" });
         xhr.send(yourCoords);
         */
+        
+
+        var details = {
+            'somedata': yourCoords
+        };
+
+        var formBody = [];
+        for (var property in details) {
+            var encodedKey = encodeURIComponent(property);
+            var encodedValue = encodeURIComponent(details[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+        
+        
+        
+        
+        console.log("test"+formBody);
         fetch("get", {
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain'
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
-            body: yourCoords,
+            body: formBody,
         })
             .then(
                 function (response) {
@@ -95,10 +116,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             response.status);
                         return;
                     }
-
-                    response.json().then(function (data) {
-                        console.log("Found message: " + data.somedata);
-                        dataField.innerHTML = "You found a message that says: " + data.somedata + "<br> At coordinates:<br> Latitude " + data.lat + "<br> Longitude " + data.lon;
+                    console.log(response);
+                    response.json().then(function (jon) {
+                        console.log(jon);
+                        console.log("Found message: " + jon.data[0].somedata);
+                       // dataField.innerHTML = "You found a message that says: " + //data.somedata + "<br> At coordinates:<br> Latitude " + //data.lat + "<br> Longitude " + data.lon;
+                        let s = "";
+                        s += "<br><h2> This areas stories</h2><br>";
+                        jon.data.forEach(function(ele){
+                            s += "<br>"+ele.somedata+"<br>";
+                            
+                        });
+                        
+                        dataField.innerHTML = s;
+                        
                     });
                 });
                 
@@ -150,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error('Error: ' + error))
             .then(response => console.log('Success:', response));
             */
-        let somedata = data.value + ";" + long + ";" + lat + ";" + key.value + ";" + range.value;
+        let somedata = data.value + ";" + lat + ";" + long + ";" + key.value + ";" + range.value;
 
         var details = {
             'somedata': somedata
@@ -163,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-
+        console.log(formBody);
         fetch('add', {
             method: 'POST',
             headers: {

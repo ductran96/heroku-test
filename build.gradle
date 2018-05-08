@@ -56,7 +56,7 @@ dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0' 
     testCompile 'junit:junit:4.12'
 	compileOnly 'org.eclipse.jetty:jetty-runner:9.4.9.v20180320'
-
+	compile 'org.json:json:20160810'
 
 
 integTestCompile configurations.testCompile
